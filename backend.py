@@ -1,7 +1,7 @@
 from randomising import randomiser
 from crane import Crane
 from stack import Stack
-
+import numpy as np
 
 
 def initialise_stack(stack):
@@ -29,8 +29,24 @@ def generate_output(in_column, process, crane):
 
 def print1A(inp, process, out):
     print(inp, process, out, sep='\n')
+    print('length of output is ', len(out))
+    print('total number of boxes is ', sum(out))
+    print('\n')
 
+def print1C(new_out):
+    print(new_out)
+    print('length of randomised output is ', len(new_out))
+    print('total number of boxes is ', sum(new_out))
+    print('\n')
+    
 
+def generate_rand_out(out):
+    new_out_stack = randomiser(out)
+    new_out_stack = np.ndarray.tolist(new_out_stack)
+    new_out_columns = initialise_stack(new_out_stack)
+
+    return new_out_stack, new_out_columns
+    
 
 def main():
 
@@ -42,13 +58,11 @@ def main():
     jonathan = Crane()
 
     output_stack, output_columns = generate_output(input_columns, process_stack, jonathan)
+    rand_out_stack, rand_out_columns = generate_rand_out(output_columns)
 
     print1A(input_stack, process_stack, output_stack)
-    print1B()
-    
+    print1C(rand_out_stack)
 
-    
-    
 
 if __name__ == "__main__":
     main()

@@ -10,7 +10,7 @@ import numpy as np
 def randomiser(in1):
     #current state of stacks is passed. Necessary attributes of stacks are passed
     current = in1
-    no_stacks = len(input1)
+    no_stacks = len(in1)
     desired = np.zeros(no_stacks)
     totalBox = 0
 
