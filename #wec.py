@@ -1,4 +1,7 @@
 #wec
+from ast import Break
+import numpy as np
+
 inp = [3,1,2,1,4,0,1]
 out = [2,1,3,1,4,0,1]
 lilstack = []
@@ -12,40 +15,32 @@ start = 0
 step = 0
 
 #determine stacks bigger and smaller than the output and store
-for n in inp:
-    if inp(n) < out(n):
-        n = lilstack(n)
+for n in range(len(inp)):
+    if inp[n] < out[n]:
+        lilstack.append(n)
+    elif inp[n] > out[n]:
+        bigstack.append(n)
     else:
-        n = bigstack(n)
+        continue
+
 # determine the half of the in with more boxes
 rem = len(inp)%2
 half = len(inp)/2 - rem
-for n in inp:
+for n in range(len(inp)):
     if n > half:
-        sum1 = sum1 + inp(n)
+        sum1 = sum1 + inp[n]
     else:
-        sum2 = sum2 + inp(n)
+        sum2 = sum2 + inp[n]
+
 #start from the side with the most boxes
-if sum1>sum2:
-    start = bigstack(len(bigstack)-1)
+if sum2>sum1:
+    start = bigstack[len(bigstack)-1]
+    start_direction = 0
 else: 
-    start = bigstack(0)
+    start = bigstack[0]
+    start_direction = 1
+
 #start moving boxes
-crane = 3
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
 
 
 
