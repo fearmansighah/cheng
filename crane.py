@@ -36,9 +36,8 @@ class Crane:
     def lift_box(self, stack):
         self.check_stack_state(self, stack)
         if self.holding_box == True:
-            pass
-        if stack.state == 'safe' or stack.state == 'full':
-            stack.decBox()
+            if stack.state == 'safe' or stack.state == 'full':
+                stack.decBox()
         else:
             pass
 
@@ -46,9 +45,8 @@ class Crane:
     def drop_box(self, stack):
         self.check_stack_state(self, stack)
         if self.holding_box == False:
-            pass
-        if stack.state == 'safe' or 'empty':
-            stack.addBox()
+            if stack.state == 'safe' or 'empty':
+                stack.addBox()
         else:
             pass
 
