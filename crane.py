@@ -13,7 +13,7 @@ class Crane():
             stack.state = 'empty'
         elif stack.size == 4:
             stack.state = 'full'
-        elif stack.size > 0 and self.size < 4:
+        elif stack.size > 0 and stack.size < 4:
             stack.state = 'safe'
 
 
@@ -35,18 +35,20 @@ class Crane():
 
     def lift_box(self, stack):
         self.check_stack_state(stack)
-        if self.holding_box == True:
+        if self.holding_box == False:
             if stack.state == 'safe' or stack.state == 'full':
                 stack.decBox()
+                self.holding_box = True
         else:
             pass
 
 
     def drop_box(self, stack):
         self.check_stack_state(stack)
-        if self.holding_box == False:
+        if self.holding_box == True:
             if stack.state == 'safe' or 'empty':
                 stack.addBox()
+                self.holding_box = False
         else:
             pass
 

@@ -1,7 +1,5 @@
 #Defining function for randomising desired states of the stacks.
-from pydoc import doc
 from stack import Stack
-from crane import Crane
 
 import random
 import numpy as np
@@ -9,7 +7,7 @@ import numpy as np
 
 
 #Function for randomising
-def randomising(in1):
+def randomiser(in1):
     #current state of stacks is passed. Necessary attributes of stacks are passed
     current = in1
     no_stacks = len(input1)
@@ -41,15 +39,3 @@ def randomising(in1):
     #Function returns the randomised array of stack sizes in type numpy.float64.
     return desired_int
 
-#Test program
-x = Stack(2, 1)
-y = Stack(3, 2)
-z = Stack(0, 3)
-a = Stack(1, 4)
-b = Stack(0, 5)
-c = Stack(4, 6)
-d = Stack(0, 7)
-input1 = [x, y, z, a, b, c, d]
-print(f'input 1: [{x.size}, {y.size}, {z.size}, {a.size}, {b.size}, {c.size}, {d.size}]')
-desired = randomising(input1)
-print(desired)
