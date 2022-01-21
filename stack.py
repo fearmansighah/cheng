@@ -1,9 +1,9 @@
 class Stack:
-    def __init__(self, size, position, state, in_out_diff):
+    def __init__(self, size, position):
         self.size = size
         self.position = position
-        self.state = state # full, empty, safe
-        self.in_out_diff = in_out_diff
+        self.state = 'empty' # full, empty, safe
+        self.in_out_diff = '0'
 
     def addBox(self):
         self.size += 1
