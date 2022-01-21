@@ -41,7 +41,35 @@ else:
     start_direction = 1
 
 #start moving boxes
+if start = craneloc:
+    continue
+elif start < craneloc:
+    step = craneloc - start
+    # crane = 2 xstep
+else:
+    step = start - craneloc
+    #crane = 1 xstep
 
+len_lilstack = len(lilstack)
+len_bigstack = len(bigstack)
+
+## crane = 3
+step = start - lilstack(len_lilstack)
+if start < lilstack:
+    #crane = 2
+elif start > lilstack:
+    #crane = 1
+start = craneloc
+#crane = 4 
+len_lilstack -= 1
+lilstack.remove(len_lilstack)
+
+# once crane has dropped box
+step = start - bigstack(len_bigstack)
+if start < bigstack:
+    #crane = 2
+elif start > bigstack:
+    #crane = 1
 
 
 # compare input and output, set flags for each stack starting from the left (=/</>)
