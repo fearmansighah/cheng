@@ -8,15 +8,16 @@ import numpy as np
 
 
 
-def randomising(input):
+#Function for randomising
+def randomising(in1):
     #current state of stacks is passed. Necessary attributes of stacks are passed
-    current = input
-    no_stacks = len(input)
+    current = in1
+    no_stacks = len(input1)
     desired = np.zeros(no_stacks)
     totalBox = 0
 
     #summing number of boxes from each stack
-    for x in input:
+    for x in in1:
         totalBox += x.size
 
     #Algorithm to construct random desired output
@@ -35,9 +36,12 @@ def randomising(input):
             elif sum == totalBox:
                 y = False
 
-    #Function returns the randomised array of stack sizes in type numpy.float64.
-    return desired
+    desired_int = desired.astype(int)
 
+    #Function returns the randomised array of stack sizes in type numpy.float64.
+    return desired_int
+
+#Test program
 x = Stack(2, 1)
 y = Stack(3, 2)
 z = Stack(0, 3)
@@ -48,4 +52,4 @@ d = Stack(0, 7)
 input1 = [x, y, z, a, b, c, d]
 print(f'input 1: [{x.size}, {y.size}, {z.size}, {a.size}, {b.size}, {c.size}, {d.size}]')
 desired = randomising(input1)
-print(type(int(desired[0])))
+print(desired)
