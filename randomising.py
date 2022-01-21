@@ -1,12 +1,12 @@
 #Defining function for randomising desired states of the stacks.
 from pydoc import doc
 from stack import Stack
+from crane import Crane
 
 import random
 import numpy as np
 
-input = []
-
+print('Hello')
 
 def randomising(input):
     #current state of stacks is passed. Necessary attributes of stacks are passed
@@ -23,7 +23,7 @@ def randomising(input):
     y = True
     sum = 0
     while y:
-        n = random.randrange(1, no_stacks+1)
+        n = random.randrange(0, no_stacks)
         if desired[n] != 0:
             desired[n] = random.randrange(1, 5)
             sum += desired[n]
@@ -36,3 +36,10 @@ def randomising(input):
                 y = False
 
     return desired
+
+x = Stack(2, 1)
+y = Stack(3, 2)
+z = Stack(1, 3)
+input1 = [x, y, z]
+t = randomising(input1)
+print(t)
