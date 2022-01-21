@@ -1,11 +1,11 @@
 #wec
 from ast import Break
-import numpy as np
 
-inp = [3,1,2,1,4,0,1]
+inp = [3,1,2,1,4,0,3]
 out = [2,1,3,1,4,0,1]
 lilstack = []
 bigstack = []
+emptystack = []
 process = []
 crane = [0,1,2,3,4]
 craneloc = 0
@@ -31,45 +31,64 @@ for n in range(len(inp)):
         sum1 = sum1 + inp[n]
     else:
         sum2 = sum2 + inp[n]
-
+print(rem, half, sum1, sum2)
 #start from the side with the most boxes
-if sum2>sum1:
+if sum2 > sum1:
     start = bigstack[len(bigstack)-1]
-    start_direction = 0
 else: 
     start = bigstack[0]
-    start_direction = 1
-
+print(start)
 #start moving boxes
-if start = craneloc:
-    continue
-elif start < craneloc:
-    step = craneloc - start
-    # crane = 2 xstep
-else:
-    step = start - craneloc
-    #crane = 1 xstep
-
 len_lilstack = len(lilstack)
 len_bigstack = len(bigstack)
 
-## crane = 3
-step = start - lilstack(len_lilstack)
-if start < lilstack:
-    #crane = 2
-elif start > lilstack:
-    #crane = 1
-start = craneloc
-#crane = 4 
-len_lilstack -= 1
-lilstack.remove(len_lilstack)
+while (len(lilstack) > 0) or (len(bigstack) > 0):
+    if start == craneloc:
+        pass
+    elif start < craneloc:
+        step = craneloc - start
+        for n in step:
+            process.append(1)
+    else:
+        step = start - craneloc
+        for n in step:
+            process.append(2)
+    
+    ## crane = 3
+    craneloc = start
+    process.append(3)
+    print(process)
 
-# once crane has dropped box
-step = start - bigstack(len_bigstack)
-if start < bigstack:
-    #crane = 2
-elif start > bigstack:
-    #crane = 1
+    step = start - lilstack[len(lilstack)-1]
+    print(step)
+    
+    if start < lilstack[len(lilstack)-1]:
+        for n in step:
+            process.append(2)
+    elif start > lilstack[len(lilstack)-1]:
+        for n in step:
+            process.append(1)
+    else:
+        continue
+
+    start = craneloc
+    process.append(4)
+    if 
+    lilstack.pop()
+    len_lilstack -= 1
+
+    # once crane has dropped box
+    step = start - bigstack(len_bigstack)
+    if start < bigstack:
+        for n in step:
+            process.append(2)
+    elif start > bigstack:
+        for n in step:
+            process.append(1)
+    else:
+        continue
+    
+    len_bigstack -= 1
 
 
 # compare input and output, set flags for each stack starting from the left (=/</>)
