@@ -1,3 +1,6 @@
+from operator import truediv
+
+
 class Crane:
 
     def __init__(self):
@@ -32,6 +35,8 @@ class Crane:
 
     def lift_box(self, stack):
         self.check_stack_state(self, stack)
+        if self.holding_box == True:
+            pass
         if stack.state == 'safe' or stack.state == 'full':
             stack.decBox()
         else:
@@ -40,6 +45,8 @@ class Crane:
 
     def drop_box(self, stack):
         self.check_stack_state(self, stack)
+        if self.holding_box == False:
+            pass
         if stack.state == 'safe' or 'empty':
             stack.addBox()
         else:

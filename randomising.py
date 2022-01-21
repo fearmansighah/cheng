@@ -1,11 +1,11 @@
 #Defining function for randomising desired states of the stacks.
 from pydoc import doc
 from stack import Stack
+from crane import Crane
 
 import random
 import numpy as np
 
-input = []
 
 
 def randomising(input):
@@ -23,16 +23,29 @@ def randomising(input):
     y = True
     sum = 0
     while y:
-        n = random.randrange(1, no_stacks+1)
-        if desired[n] != 0:
+        n = random.randrange(0, no_stacks)
+        if desired[n] == 0:
             desired[n] = random.randrange(1, 5)
             sum += desired[n]
             if sum < totalBox:
-                continue
+                y = True
             elif sum > totalBox:
                 desired[n] = desired[n] - (sum - totalBox)
                 y = False
             elif sum == totalBox:
                 y = False
 
+    #Function returns the randomised array of stack sizes in type numpy.float64.
     return desired
+
+x = Stack(2, 1)
+y = Stack(3, 2)
+z = Stack(0, 3)
+a = Stack(1, 4)
+b = Stack(0, 5)
+c = Stack(4, 6)
+d = Stack(0, 7)
+input1 = [x, y, z, a, b, c, d]
+print(f'input 1: [{x.size}, {y.size}, {z.size}, {a.size}, {b.size}, {c.size}, {d.size}]')
+desired = randomising(input1)
+print(type(int(desired[0])))

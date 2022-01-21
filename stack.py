@@ -3,7 +3,7 @@ class Stack:
         self.size = size
         self.position = position
         self.state = 'empty' # full, empty, safe
-        self.in_out_diff = '0'
+        self.in_out_diff = 0
 
     def addBox(self):
         self.size += 1
