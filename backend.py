@@ -1,4 +1,4 @@
-from turtle import position
+from randomising import randomiser
 from crane import Crane
 from stack import Stack
 
@@ -11,19 +11,24 @@ def initialise_stack(stack):
     for pos in range(len(stack)):
         nBoxes = stack[pos]
         columns.append(Stack(size=nBoxes, position=pos))
-        print(columns[pos].size, columns[pos].position)
 
     return columns
 
 def generate_output(in_column, process, crane):
 
-    out_column = in_column
+    out_stack = []
+    out_columns = in_column
     for step in process:
-        crane.movement(step, out_stack)
+        crane.movement(step, out_columns[crane.position])
     
-    for pos in out_stack:
-        print(pos)
-        print(pos.size, pos.position)
+    for pos in range(len(out_columns)):
+        nBoxes = out_columns[pos].size
+        out_stack.append(nBoxes)
+
+    return out_stack, out_columns
+
+def print1A(inp, process, out):
+    print(inp, process, out, sep='\n')
 
 
 
@@ -36,7 +41,10 @@ def main():
 
     jonathan = Crane()
 
-    output_columns = generate_output(input_columns, process_stack, jonathan)
+    output_stack, output_columns = generate_output(input_columns, process_stack, jonathan)
+
+    print1A(input_stack, process_stack, output_stack)
+    print1B()
     
 
     
