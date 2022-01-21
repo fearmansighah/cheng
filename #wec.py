@@ -54,43 +54,50 @@ while (len(lilstack) > 0) or (len(bigstack) > 0):
             process.append(1)
     else:
         step = start - craneloc
-        for n in step:
+        for n in range(step):
             process.append(2)
-    
-    ## crane = 3
-    start = craneloc
-    process.append(3)
+    craneloc = start
+    inp[craneloc] -= 1
     if inp[craneloc] == out[craneloc]:
-        bigstack.pop(craneloc)
+        bigstack.remove(craneloc)
     else:
         pass
+    print(process)
+    print(craneloc)
+    process.append(3)
 
+    # box in hand
     step = start - lilstack[len(lilstack)-1]
-    
     if start < lilstack[len(lilstack)-1]:
         for n in range(step):
             process.append(2)
+            craneloc += 1
     elif start > lilstack[len(lilstack)-1]:
         for n in range(step):
             process.append(1)
+            craneloc -=1
     else:
         continue
 
-    start = craneloc
-    process.append(4)
+    inp[craneloc] += 1
     if inp[craneloc] == out[craneloc]:
-        lilstack.pop(craneloc)
+        lilstack.remove(craneloc)
     else:
         pass
-
+    process.append(4)
+    print(process)
+    print(craneloc)
+    
     # once crane has dropped box
     step = start - bigstack[len(bigstack)-1]
     if start < bigstack[len(bigstack)-1]:
         for n in range(step):
             process.append(2)
-    elif start > bigstack:
+            craneloc += 1 
+    elif start > bigstack[len(bigstack)-1]:
         for n in range(step):
             process.append(1)
+            craneloc -= 1
     else:
         continue
 
