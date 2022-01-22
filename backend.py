@@ -26,6 +26,12 @@ def generate_output(in_column, process, crane):
         nBoxes = out_columns[pos].size
         out_stack.append(nBoxes)
 
+    with open('output.csv', 'w') as f:
+        write = csv.writer(f)
+        write.writerow(out_stack)
+    f.close
+
+
     return out_stack, out_columns
     
 
@@ -56,22 +62,40 @@ def generate_rand_out(out):
 
 
     return new_out_stack, new_out_columns
+
+
+def readInpProCSV(csv_file):
+    
+    with open('inputAndProcess.csv', newline='') as f:
+        reader = csv.reader(f)
+        data = list(reader)
+    f.close()
+
+    print(data[0])
+    print(data[1])
+
+    inp =  [int(i) for i in data[0]]
+    
+    process = [int(i) for i in data[1]]
+
+    return inp, process
+
+        
     
 
 def main():
 
-    input_stack = [3, 1, 2, 1, 4, 0, 1]
-    input_columns = initialise_stack(input_stack)
+    input_stack, process_stack = readInpProCSV('inputAndProcess.csv')
 
-    process_stack = [3, 2, 2, 2, 4, 3, 1, 4, 0]
+    input_columns = initialise_stack(input_stack)
 
     jonathan = Crane()
 
     output_stack, output_columns = generate_output(input_columns, process_stack, jonathan)
-    rand_out_stack, rand_out_columns = generate_rand_out(output_columns)
+    #rand_out_stack, rand_out_columns = generate_rand_out(output_columns)
 
     print1A(input_stack, process_stack, output_stack)
-    print1C(rand_out_stack)
+    #print1C(rand_out_stack)
 
 
 if __name__ == "__main__":
