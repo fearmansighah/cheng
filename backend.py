@@ -2,6 +2,7 @@ from randomising import randomiser
 from crane import Crane
 from stack import Stack
 import numpy as np
+import csv
 
 
 def initialise_stack(stack):
@@ -26,6 +27,7 @@ def generate_output(in_column, process, crane):
         out_stack.append(nBoxes)
 
     return out_stack, out_columns
+    
 
 def print1A(inp, process, out):
     print(inp, process, out, sep='\n')
@@ -33,17 +35,25 @@ def print1A(inp, process, out):
     print('total number of boxes is ', sum(out))
     print('\n')
 
+
 def print1C(new_out):
     print(new_out)
     print('length of randomised output is ', len(new_out))
     print('total number of boxes is ', sum(new_out))
     print('\n')
+
     
 
 def generate_rand_out(out):
     new_out_stack = randomiser(out)
     new_out_stack = np.ndarray.tolist(new_out_stack)
     new_out_columns = initialise_stack(new_out_stack)
+
+    with open('output.csv', 'w') as f:
+        write = csv.writer(f)
+        write.writerow(new_out_stack)
+    f.close
+
 
     return new_out_stack, new_out_columns
     
