@@ -11,12 +11,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import csv
 import os
+import backend
+from time import sleep
 
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1043, 600)
+        MainWindow.resize(1043, 800)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
@@ -85,6 +87,8 @@ class Ui_MainWindow(object):
 
         self.line = QtWidgets.QFrame(self.centralwidget)
         self.line_2 = QtWidgets.QFrame(self.centralwidget)
+        self.line_3 = QtWidgets.QFrame(self.centralwidget)
+        self.line_4 = QtWidgets.QFrame(self.centralwidget)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -103,15 +107,21 @@ class Ui_MainWindow(object):
 
         if cond:
             self.writeCSV(input,process)
-            self.drawMap(input,"input")
-            self.readAndDisplay()
+            self.drawMap(input)
+            backend.main()
+            sleep(2)
+            
+            #self.drawMapOut(self.readAndDisplay())
+            
+            
+            
 
 
         else:
             out = "Error: Enter input and process configuration in numeric form"
             self.outputText.setText(out + "\nprocess configuration must end with 0")
 
-    def drawMap(self, input,type):
+    def drawMap(self, input):
         columns = len(input)
         self.line.setGeometry(QtCore.QRect(450, 170, 21, 351))
         self.line.setFrameShape(QtWidgets.QFrame.VLine)
@@ -122,13 +132,16 @@ class Ui_MainWindow(object):
         self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
         self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_2.setObjectName("line_2")
-
+  
         for column in range(columns):
 
             numBox =  int(input[column])
             for box in range(numBox):
                 x = self.boxes.pop(box)
                 x.setGeometry(QtCore.QRect(460+60*column, 460 - 60*box, 60, 60))
+
+
+    
 
     def writeCSV(self, input, process):
         with open('inputAndProcess.csv', 'w', newline='') as f:
@@ -149,7 +162,7 @@ class Ui_MainWindow(object):
                     out = out.replace(',', '')
                     self.outputText.setText(out)
                     print("printed!")
-                    break
+                    return row
 
 
     def retranslateUi(self, MainWindow):
