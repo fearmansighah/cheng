@@ -2,7 +2,7 @@
 from ast import Break
 from threading import setprofile
 
-inp = [3,1,2,1,4,0,1]
+inp = [3,1,2,1,3,1,1]
 out = [2,1,3,1,4,0,1]
 lilstack = []
 bigstack = []
@@ -67,15 +67,10 @@ while (len(lilstack) > 0) or (len(bigstack) > 0):
         pass
     
     process.append(3)
-    print(process)
-    print(craneloc)
 
     # box in hand
-    print(lilstack)
-    print(bigstack)
     if len(lilstack) > 0:
         step = abs(craneloc - lilstack[len(lilstack)-1])
-        print(step) #2
         if start < lilstack[len(lilstack)-1]:
             for n in range(step):
                 process.append(2)
@@ -97,7 +92,6 @@ while (len(lilstack) > 0) or (len(bigstack) > 0):
 
     process.append(4)
     print(process)
-    print(craneloc)
 
     # once crane has dropped box
     if len(bigstack) > 0:
