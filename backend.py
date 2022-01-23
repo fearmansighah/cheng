@@ -1,12 +1,11 @@
 from randomising import randomiser
+from process_config_solver import findProcess
 from crane import Crane
 from stack import Stack
-import numpy as np
 import csv
 
 
-def initialise_stack(stack):
-    # creating list       
+def initialise_stack(stack):     
     columns = [] 
     
     for pos in range(len(stack)):
@@ -15,12 +14,17 @@ def initialise_stack(stack):
 
     return columns
 
-def generate_output(in_column, process, crane):
+def initialise_csv(csv):
+    with open(csv, 'w') as f:
+       f.truncate()
+    f.close
 
+
+def generate_output(in_column, process, crane):
     out_stack = []
     out_columns = in_column
-    for step in process:
-        crane.movement(step, out_columns[crane.position])
+    for code in process:
+        crane.movement(code, out_columns[crane.position])
     
     for pos in range(len(out_columns)):
         nBoxes = out_columns[pos].size
@@ -31,28 +35,11 @@ def generate_output(in_column, process, crane):
         write.writerow(out_stack)
     f.close
 
-
     return out_stack, out_columns
-    
 
-def print1A(inp, process, out):
-    print(inp, process, out, sep='\n')
-    print('length of output is ', len(out))
-    print('total number of boxes is ', sum(out))
-    print('\n')
-
-
-def print1C(new_out):
-    print(new_out)
-    print('length of randomised output is ', len(new_out))
-    print('total number of boxes is ', sum(new_out))
-    print('\n')
-
-    
 
 def generate_rand_out(out):
     new_out_stack = randomiser(out)
-    new_out_stack = np.ndarray.tolist(new_out_stack)
     new_out_columns = initialise_stack(new_out_stack)
 
     with open('output.csv', 'w') as f:
@@ -60,19 +47,14 @@ def generate_rand_out(out):
         write.writerow(new_out_stack)
     f.close
 
-
     return new_out_stack, new_out_columns
 
 
 def readInpProCSV(csv_file):
-    
-    with open('inputAndProcess.csv', newline='') as f:
+    with open(csv_file, newline='') as f:
         reader = csv.reader(f)
         data = list(reader)
     f.close()
-
-    print(data[0])
-    print(data[1])
 
     inp =  [int(i) for i in data[0]]
     
@@ -80,10 +62,33 @@ def readInpProCSV(csv_file):
 
     return inp, process
 
-        
+
+def print1A(inp, process, out):
+    print('input configuration: ', inp)
+    print('process configuration: ', process)
+    print('output configuration: ', out)
+    print('length of input configuration is: ', len(out))
+    print('total number of boxes for input configuration: ', sum(out))
+    print('length of output conifguration is: ', len(out))
+    print('total number of boxes for output configuration: ', sum(out))
+    print('\n')
+
+
+def print1B(process):
+    print(f'process configuration for randomization was: ', process)
     
 
+def print1C(new_out):
+    print('randomised output configuration: ', new_out)
+    print('length of randomised output configuration is: ', len(new_out))
+    print('total number of boxes for randomised output configuration is: ', sum(new_out))
+    print('\n')
+
+        
+
 def main():
+
+    initialise_csv('output.csv')
 
     input_stack, process_stack = readInpProCSV('inputAndProcess.csv')
 
@@ -92,10 +97,12 @@ def main():
     jonathan = Crane()
 
     output_stack, output_columns = generate_output(input_columns, process_stack, jonathan)
-    #rand_out_stack, rand_out_columns = generate_rand_out(output_columns)
+    rand_out_stack, rand_out_columns = generate_rand_out(output_columns)
+    rand_process_config = findProcess(output_stack, rand_out_stack, jonathan.position)
 
     print1A(input_stack, process_stack, output_stack)
-    #print1C(rand_out_stack)
+    print1C(rand_out_stack)
+    print1B(rand_process_config)
 
 
 if __name__ == "__main__":

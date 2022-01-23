@@ -1,11 +1,8 @@
-from operator import truediv
-
-
 class Crane():
 
     def __init__(self):
         # initial settings
-        self.holding_box = False # how to link with subsequent process
+        self.holding_box = False
         self.position = 0
 
     def check_stack_state(self, stack):

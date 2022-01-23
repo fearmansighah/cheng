@@ -1,24 +1,17 @@
-#Defining function for randomising desired states of the stacks.
-from stack import Stack
-
 import random
 import numpy as np
 
-
-
-#Function for randomising
-def randomiser(in1):
-    #current state of stacks is passed. Necessary attributes of stacks are passed
-    current = in1
-    no_stacks = len(in1)
+def randomiser(inp):
+    # current state of stacks is passed. Necessary attributes of stacks are passed
+    no_stacks = len(inp)
     desired = np.zeros(no_stacks)
     totalBox = 0
 
-    #summing number of boxes from each stack
-    for x in in1:
+    # summing number of boxes from each stack
+    for x in inp:
         totalBox += x.size
 
-    #Algorithm to construct random desired output
+    # algorithm to construct random desired output
     y = True
     sum = 0
     while y:
@@ -34,8 +27,11 @@ def randomiser(in1):
             elif sum == totalBox:
                 y = False
 
+    # randomised array of stack sizes in type numpy.float64.
     desired_int = desired.astype(int)
 
-    #Function returns the randomised array of stack sizes in type numpy.float64.
+    # convert numpy array to Python list
+    desired_int= np.ndarray.tolist(desired_int)
+
     return desired_int
 
